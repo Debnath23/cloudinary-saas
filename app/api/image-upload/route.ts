@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
+  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
@@ -23,7 +23,7 @@ export async function Post(request: NextRequest) {
 
     if (
       !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
-      !process.env.CLOUDINARY_API_KEY ||
+      !process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY ||
       !process.env.CLOUDINARY_API_SECRET
     ) {
       return NextResponse.json(
