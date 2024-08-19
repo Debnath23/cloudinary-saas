@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import UploadLoading from "@/public/video/UploadLoading.mp4";
 
 export default function VideoUpload() {
   const [file, setFile] = useState<File | null>(null);
@@ -49,7 +50,17 @@ export default function VideoUpload() {
     }
   };
 
-  return (
+  return isUploading ? (
+    <div className="flex justify-center items-center pt-[12.5%]">
+      <video
+        src={UploadLoading}
+        autoPlay
+        muted
+        loop
+        className="w-[35%] h-[35%] rounded-full"
+      />
+    </div>
+  ) : (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Upload Video</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,7 +103,8 @@ export default function VideoUpload() {
           className="btn btn-primary"
           disabled={isUploading}
         >
-          {isUploading ? "Uploading..." : "Upload Video"}
+          Upload Video
+          {/* {isUploading ? "Uploading..." : "Upload Video"} */}
         </button>
       </form>
     </div>

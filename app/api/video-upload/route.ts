@@ -84,8 +84,6 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json(video, { status: 200 })
-
-    // return NextResponse.json({ publicId: result.public_id }, { status: 200 });
   } catch (error) {
     console.log("Upload image failed: ", error);
 

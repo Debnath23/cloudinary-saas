@@ -13,6 +13,8 @@ import {
   ImageIcon,
 } from "lucide-react";
 
+import Logo from "@/public/video/logo.mp4";
+
 const sidebarItems = [
   { href: "/home", icon: LayoutDashboardIcon, label: "Home Page" },
   { href: "/social-share", icon: Share2Icon, label: "Social Share" },
@@ -103,8 +105,10 @@ export default function AppLayout({
       <div className="drawer-side">
         <label htmlFor="sidebar-drawer" className="drawer-overlay"></label>
         <aside className="bg-base-200 w-64 h-full flex flex-col">
-          <div className="flex items-center justify-center py-4">
-            <ImageIcon className="w-10 h-10 text-primary" />
+          <div className="flex items-center justify-center">
+            <a href="/home">
+            <img src="/images/logo.png" alt="logo" className="w-32 h-26" />
+            </a>
           </div>
           <ul className="menu p-4 w-full text-base-content flex-grow">
             {sidebarItems.map((item) => (

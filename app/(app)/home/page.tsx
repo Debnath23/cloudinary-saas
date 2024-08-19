@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import VideoCard from "@/components/VideoCard";
 import { Video } from "@/types";
+import Loading from "@/public/video/loading.mp4";
 
 export default function Home() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -42,7 +43,17 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center pt-[12.5%]">
+        <video
+        src={Loading}
+        autoPlay
+        muted
+        loop
+        className="w-[25%] h-[25%] rounded-full"
+      />
+      </div>
+    );
   }
 
   return (
