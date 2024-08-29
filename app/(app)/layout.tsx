@@ -108,7 +108,7 @@ export default function AppLayout({
         <aside className="bg-base-200 w-64 h-full flex flex-col">
           <div className="flex items-center justify-center">
             <a href="/home">
-            <img src="/images/logo.png" alt="logo" className="w-32 h-26" />
+            <Image src="/images/logo.png" alt="logo" className="w-32 h-26" />
             </a>
           </div>
           <ul className="menu p-4 w-full text-base-content flex-grow">
