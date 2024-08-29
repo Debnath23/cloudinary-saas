@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import Logo from "@/public/video/logo.mp4";
+import Image from "next/image";
 
 const sidebarItems = [
   { href: "/home", icon: LayoutDashboardIcon, label: "Home Page" },
@@ -73,7 +74,7 @@ export default function AppLayout({
                 <>
                   <div className="avatar">
                     <div className="w-8 h-8 rounded-full">
-                      <img
+                      <Image
                         src={user.imageUrl}
                         alt={
                           user.username || user.emailAddresses[0].emailAddress
