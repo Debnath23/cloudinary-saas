@@ -10,10 +10,8 @@ import {
   LayoutDashboardIcon,
   Share2Icon,
   UploadIcon,
-  ImageIcon,
 } from "lucide-react";
 
-import Logo from "@/public/video/logo.mp4";
 import Image from "next/image";
 
 const sidebarItems = [
@@ -63,11 +61,11 @@ export default function AppLayout({
               </label>
             </div>
             <div className="flex-1">
-              <Link href="/" onClick={handleLogoClick}>
+              {/* <Link href="/" onClick={handleLogoClick}>
                 <div className="btn btn-ghost normal-case text-2xl font-bold tracking-tight cursor-pointer">
                   Cloudinary Showcase
                 </div>
-              </Link>
+              </Link> */}
             </div>
             <div className="flex-none flex items-center space-x-4">
               {user && (
@@ -79,6 +77,8 @@ export default function AppLayout({
                         alt={
                           user.username || user.emailAddresses[0].emailAddress
                         }
+                        width={32}
+                        height={32}
                       />
                     </div>
                   </div>
@@ -107,11 +107,13 @@ export default function AppLayout({
         <label htmlFor="sidebar-drawer" className="drawer-overlay"></label>
         <aside className="bg-base-200 w-64 h-full flex flex-col">
           <div className="flex items-center justify-center">
-            <a href="/home">
-            <Image src="/images/logo.png" alt="logo" className="w-32 h-26" />
-            </a>
+            <Link href="/home">
+              <h1 className="text-lg md:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold mt-4">
+                Social Share
+              </h1>
+            </Link>
           </div>
-          <ul className="menu p-4 w-full text-base-content flex-grow">
+          <ul className="menu p-4 w-full text-base-content flex-grow mt-4">
             {sidebarItems.map((item) => (
               <li key={item.href} className="mb-2">
                 <Link

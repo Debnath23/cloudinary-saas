@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  images: {
+    domains: ['img.clerk.com', 'res.cloudinary.com'],
+  },
     webpack: (config, { isServer }) => {
       config.module.rules.push({
         test: /\.(mp4|webm|ogg|swf|ogv)$/,
