@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { getCldImageUrl, getCldVideoUrl } from "next-cloudinary";
 import { Download, Clock, FileDown, FileUp } from "lucide-react";
 import dayjs from "dayjs";
@@ -13,10 +13,10 @@ interface VideoCardProps {
   video: Video;
   onDownload: (url: string, title: string) => void;
 }
-
 const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [previewError, setPreviewError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const getThumbnailUrl = useCallback((publicId: string) => {
     return getCldImageUrl({
@@ -47,6 +47,30 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
       rawTransformations: ["e_preview:duration_15:max_seg_9:min_seg_dur_1"],
     });
   }, []);
+
+  const handleVideoDownload = () => {
+    if (!videoRef.current) return;
+
+    fetch(videoRef.current.src)
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `${video.title.replace(/\s+/g, "_").toLowerCase()}.mp4`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Download failed:", error);
+      });
+  };
 
   const formatSize = useCallback((size: number) => {
     return filesize(Number(size));
@@ -85,6 +109,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             </div>
           ) : (
             <video
+              ref={videoRef}
               src={getPreviewVideoUrl(video.publicId)}
               autoPlay
               muted
@@ -138,9 +163,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
           </div>
           <button
             className="btn btn-primary btn-sm"
-            onClick={() =>
-              onDownload(getFullVideoUrl(video.publicId), video.title)
-            }
+            onClick={handleVideoDownload}
           >
             <Download size={16} />
           </button>
