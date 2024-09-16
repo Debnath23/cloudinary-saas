@@ -50,8 +50,8 @@ export default function AppLayout({
       />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <header className="w-full bg-base-200">
-          <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="w-full bg-base-200 fixed top-0 z-50">
+          <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="sidebar-drawer"
@@ -60,12 +60,8 @@ export default function AppLayout({
                 <MenuIcon />
               </label>
             </div>
-            <div className="flex-1">
-              {/* <Link href="/" onClick={handleLogoClick}>
-                <div className="btn btn-ghost normal-case text-2xl font-bold tracking-tight cursor-pointer">
-                  Cloudinary Showcase
-                </div>
-              </Link> */}
+            <div className="flex-1 px-[30%]">
+            <h1 className=" text-lg md:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold">Videos</h1>
             </div>
             <div className="flex-none flex items-center space-x-4">
               {user && (
@@ -98,7 +94,7 @@ export default function AppLayout({
         </header>
         {/* Page content */}
         <main className="flex-grow">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 my-8">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 my-20">
             {children}
           </div>
         </main>
